@@ -559,7 +559,177 @@ armour_based_damage:
 #giving monsters utility instead of flat out damage is usually better.
 
 monster:
-
+   BirchForest:
+      updatetime: 1m
+      areas:
+          biomes:
+           - BIRCH_FOREST
+           - BIRCH_FOREST_HILLS
+           - MUTATED_BIRCH_FOREST
+           - MUTATED_BIRCH_FOREST_HILLS
+           - HELL
+      player_environment_state:
+          night: false
+      mobconfig:
+          OPskeletons:
+              identifier: fireproofskeleton
+              type: SKELETON
+              name: RabidFireWatch
+              range: 32
+              amount: 1
+              maximum_spawn_attempts: 10
+#              deathmessage: Y you hardscope
+              on_hit_message: YOU KILLED MY BIRCH. YOU BETTER RUN
+              spawn_chance: 0.44
+              drops:
+                  PowBone:
+                      material: BONE
+                      amount: 6
+                      lore: Pow wow
+                      enchants:
+                          KB1:
+                              enchant: KNOCKBACK
+                              level: 1
+              equipment:
+                  watch:
+                      material: WATCH
+                      enchants:
+                          KB5:
+                              enchant: KNOCKBACK
+                              level: 5
+                  firechest451:
+                      material: DIAMOND_CHESTPLATE
+                      enchants:
+                          Prot451:
+                              enchant: PROTECTION_FIRE
+                              level: 451
+                  fireBoots:
+                      material: LEATHER_BOOTS
+                      enchants:
+                          FeatherFall4:
+                              enchant: PROTECTION_FALL
+                              level: 4
+              buffs:
+                  CantDrown:
+                      type: WATER_BREATHING
+                      level: 2
+              on_hit_debuffs:
+                  RunForestRun:
+                      type: SPEED
+                      level: 1
+                      duration: 1s
+                      chance: 1.0 
+              blocks_to_spawn_on:
+               - DIRT
+               - GRASS
+               - GRASS_PATH
+               - STATIONARY_LAVA
+              blocks_to_spawn_in:
+               - AIR
+               - WATER
+               - STATIONARY_LAVA
+              minimum_light_level: 0
+              maximum_light_level: 15
+              alternative_version: false
+              health: 320
+              helmet_dropchance: 0
+              chestplate_dropchance: 0.04
+              leggins_dropchance: 0
+              boots_dropchance: 0
+              item_in_dropchance: 0
+              despawn_on_chunk_unload: true
+              can_pickup_items: false
+              y_spawn_range: 16
+   GimmelPlains:
+      updatetime: 1m
+      areas:
+          biomes:
+           - PLAINS
+           - MUTATED_PLAINS
+      player_environment_state:
+          night: false
+      mobconfig:
+          TheSlimes:
+              identifier: SlimeTime
+              type: SLIME
+#              name: 
+              range: 64
+              amount: 3
+              maximum_spawn_attempts: 10
+#              deathmessage:
+#              on_hit_message: Plop
+              spawn_chance: 0.05
+              on_hit_debuffs:
+                  StopForest:
+                      type: SLOW
+                      level: 2
+                      duration: 1s
+                      chance: 1.0 
+              blocks_to_spawn_on:
+               - STONE
+               - DIRT
+               - GRASS
+               - GRASS_PATH
+              blocks_to_spawn_in:
+               - AIR
+               - WATER
+              minimum_light_level: 0
+              maximum_light_level: 15
+              alternative_version: false
+#              health: 20
+              helmet_dropchance: 0
+              chestplate_dropchance: 0
+              leggins_dropchance: 0
+              boots_dropchance: 0
+              item_in_dropchance: 0
+              despawn_on_chunk_unload: false
+              can_pickup_items: false
+              y_spawn_range: 32
+          TheGlassSkulls:
+              identifier: GlassSkullTime
+              type: SKELETON
+#              name: 
+              range: 32
+              amount: 5
+              maximum_spawn_attempts: 5
+#              deathmessage:
+#              on_hit_message: 
+              spawn_chance: 0.3
+              drops:
+                  notsharpbone:
+                      material: BONE
+              equipment:
+                  sharpbone:
+                      material: BONE
+                      enchants:
+                          S1:
+                              enchant: DAMAGE_ALL
+                              level: 1   
+              buffs:
+                  FastSneak:
+                      type: SPEED
+                      level: 1
+              on_hit_debuffs:
+                  Agitated:
+                      type: SPEED
+                      level: 2
+                      duration: 1s
+                      chance: 1.0 
+              blocks_to_spawn_in:
+               - AIR
+               - WATER
+              minimum_light_level: 0
+              maximum_light_level: 4
+              alternative_version: false
+              health: 2
+              helmet_dropchance: 0
+              chestplate_dropchance: 0
+              leggins_dropchance: 0
+              boots_dropchance: 0
+              item_in_dropchance: 0.07
+              despawn_on_chunk_unload: false
+              can_pickup_items: false
+              y_spawn_range: 32
 
 #The spawner config part allows you to replace mobs spawned by mob spawners in specific areas with custom mobs. An example 
 #config could look like this:
