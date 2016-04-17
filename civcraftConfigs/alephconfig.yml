@@ -126,7 +126,7 @@ monster:
      - MUTATED_BIRCH_FOREST_HILLS
   mobconfig:
    OPskeletons:
-#    identifier: firewatchskelly
+     identifier: firewatchskelly
      type: SKELETON
      name: RabidFireWatch
      range: 32
