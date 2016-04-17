@@ -45,7 +45,7 @@ monster:
      identifier: skeletonFast
 #     name: Bruce Edwards Ivins
      spawn_chance: 0.1
-     health: 2
+     health: 12
      minimum_light_level: 0
      maximum_light_level: 4
      helmet_dropchance: 0
@@ -92,27 +92,6 @@ monster:
      spawn_chance: 0.0666
      identifier: spiders
      maximum_light_level: 7
-   GrossSlimes:
-     type: SLIME
-     spawn_chance: 0.025
-     identifier: GrossSlimes
-     alternative_version: false
-     despawn_on_chunk_unload: false
-     maximum_light_level: 15
-     y_spawn_range: 8
-     on_hit_debuffs:
-      Sticky:
-       type: SLOW
-       level: 2
-       duration: 2s
-       chance: 1.0 
-      GrossSlime:
-       type: POISON
-       level: 15
-       duration: 5s
-       chance: 0.25
-     blocks_to_spawn_on:
-      - GRASS
    creepers:
      type: CREEPER 
      spawn_chance: 0.0222
