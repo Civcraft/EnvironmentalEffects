@@ -165,7 +165,7 @@ monster:
        type: WATER_BREATHING
        level: 2
       Fast1:
-       type: Speed
+       type: SPEED
        level: 1
      on_hit_debuffs:
       RunForestRun:
