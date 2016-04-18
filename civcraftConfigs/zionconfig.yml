@@ -27,8 +27,8 @@ daytime_modifier:
 
 fireball:
  netherFireRain:
- frequency: 1h
- range: 96
+ frequency: 1m
+ range: 16
  areas:
  biomes:
   - HELL
@@ -246,12 +246,11 @@ monster:
       spawn_chance: 0.05
       identifier: magmacube
       despawn_on_chunk_unload: true
-    sinspirit:
+    dangedspirit:
       type: ZOMBIE
       spawn_chance: 0.1
-      identifier: sinspirit
-      name:  Spirit of Sintralin
-      alternative_version: true
+      identifier: dangedspirit
+      name: §dSuccubus
       despawn_on_chunk_unload: true
       maximum_light_level: 15
       drops:
@@ -271,7 +270,7 @@ monster:
                level: 2
                duration: 5s
                chance: 1
-      on_hit_message: HCF 4 LIFE
+      on_hit_message: Your strength is very tasty
       blocks_to_spawn_on:
          - NETHERRACK
          - OBSIDIAN
