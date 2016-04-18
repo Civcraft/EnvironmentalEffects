@@ -157,7 +157,7 @@ monster:
      spawn_chance: 0.0111
      identifier: enderman
      maximum_light_level: 7
-  Iceplains:
+ Iceplains:
   updatetime: 1m
   areas:
     biomes:
@@ -221,39 +221,3 @@ monster:
      despawn_on_chunk_unload: true
      can_pickup_items: false
      y_spawn_range: 16
-
-spawner:
- GhostWitchesOfNSR:
-  updatetime: 1m
-  areas:
-   locations:
-    NSR:
-     Shape: CIRCLE
-     xsize: 50
-     center:
-       x: 400
-       z: 390
-  mobs:
-   GhostWitch:
-    identifier: FloatingWitch
-    spawn: WITCH
-    type: WITCH
-    name: §oOl' Sally
-    range: 32
-    amount: 1
-    maximum_spawn_attempts: 10
-    spawn_chance: 0.4
-    drops:
-     Newfriendlives:
-      material: NETHER_WARTS
-      amount: 20
-      lore: The Great War's Souls
-    buffs:
-     Ghosty:
-      type: INVISIBILITY
-     Slow2:
-      type: SLOW
-      level: 2
-    y_spawn_range: 8
-    minimum_light_level: 0
-    maximum_light_level: 4
