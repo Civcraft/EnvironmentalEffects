@@ -163,12 +163,19 @@ monster:
       fireBoots154:
        material: LEATHER_BOOTS
        enchants:
+        FeatherFall4:
+         enchant: PROTECTION_FALL
+         level: 4
         Prot451:
          enchant: PROTECTION_FIRE
          level: 451
-# Testing if the skelly can wear a black dyed glass head.
-     glasshelm:
-       material: GLASS;0
+# Skeleton's cannot wear glass. Put a leather helmet on instead
+      exglasshelm:
+       material: LEATHER_HELMET
+       enchants:
+        Prot451:
+         enchant: PROTECTION_FIRE
+         level: 451
      buffs:
       CantDrown:
        type: WATER_BREATHING
@@ -205,9 +212,7 @@ monster:
      health: 320
      chestplate_dropchance: 0.02
      leggins_dropchance: 0.02
-     boots_dropchance: 0.01
-     item_in_dropchance: 0
+     boots_dropchance: 0.02
      helmet_dropchance: 0.02
      despawn_on_chunk_unload: true
-     can_pickup_items: false
      y_spawn_range: 16
