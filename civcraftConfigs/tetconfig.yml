@@ -170,9 +170,7 @@ monster:
         FeatherFall4:
          enchant: PROTECTION_FALL
          level: 3
-#Warning: Glass helmet may be non functional. Eleminate glass helmet if needed.
-     glasshelm:
-       material: GLASS;0
+#No glass helms permitted. Leave it to be whatever helmet wanted.
      buffs:
       CantDrown:
        type: WATER_BREATHING
@@ -274,53 +272,3 @@ monster:
                        level: 1
                        duration: 3s
                        chance: 0.5 
-spawner:
- zombieloggers:
-  updatetime: 2m
-  areas:
-   locations:
-    BongoBongoLand:
-     Shape: CIRCLE
-     xsize: 180
-     center:
-       x: -860
-       z: 570
-  mobs:
-   darklogger:
-    identifier: zombielogger
-    spawn: ZOMBIE
-    type: ZOMBIE
-    name: §3Paul §3Bunyan
-    range: 32
-    amount: 1
-    maximum_spawn_attempts: 10
-    spawn_chance: 0.45
-    equipment:
-     safetyhat:
-       material: LEATHER_HELMET
-       enchants:
-        prot5:
-         type: PROTECTION_ENVIRONMENTAL
-         level: 5
-     burningaxe:
-      type: WOOD_AXE
-      enchants:
-       burning1:
-        type: FIRE_ASPECT
-        level: 1
-    drops:
-     Newfriendbloodiedaxe:
-      material: WOOD_AXE
-      amount: 1
-      lore: Burning for you
-      enchants:
-       Burning:
-        type: FIRE_ASPECT
-        level: 1
-    buffs:
-     HealthyJack:
-      type: SPEED
-      level: 1
-    y_spawn_range: 16
-    minimum_light_level: 0
-    maximum_light_level: 6
