@@ -157,3 +157,103 @@ monster:
      spawn_chance: 0.0111
      identifier: enderman
      maximum_light_level: 7
+  Iceplains:
+  updatetime: 1m
+  areas:
+    biomes:
+     - ROOFED_FOREST
+     - MEGA_SPRUCE_TAIGA
+     - ICE_PLAINS
+  mobconfig:
+    OPirongolem:
+     identifier: PowerGolem
+     type: IRON_GOLEM
+     name: Power Golem
+     on_hit_message: Git Rekt Son
+     spawn_chance: 0.1
+     drops:
+      DasRekker:
+       material: WOOD_SWORD 
+       amount: 1
+       chance: 0.01
+       lore: Das Rekker Wood Sword
+       enchants:
+        FA2:
+         enchant: FIRE_ASPECT
+         level: 2
+         S2:
+         enchant: DAMAGE_ALL
+         level: 2
+     buffs:
+      s4:
+       type: INCREASE_DAMAGE
+       level: 4
+      Fast4:
+       type: SPEED
+       level: 4
+     on_hit_debuffs:
+      Confused:
+       type: CONFUSION
+       level: 1
+       duration: 10s
+       chance: 1.0 
+      blinded:
+       type: BLINDNESS
+       level: 1
+       duration: 5s
+       chance: 1.0 
+      Slowness:
+       type: SLOW
+       level: 2
+       duration: 5s
+       chance: 1.0 
+     blocks_to_spawn_on:
+      - STONE
+      - DIRT
+      - GRASS
+      - STATIONARY_LAVA
+      - STATIONARY_WATER 
+     blocks_to_spawn_in:
+      - AIR
+      - STATIONARY_LAVA
+      - STATIONARY_WATER 
+     health: 3000
+     despawn_on_chunk_unload: true
+     can_pickup_items: false
+     y_spawn_range: 16
+
+spawner:
+ GhostWitchesOfNSR:
+  updatetime: 1m
+  areas:
+   locations:
+    NSR:
+     Shape: CIRCLE
+     xsize: 50
+     center:
+       x: 400
+       z: 390
+  mobs:
+   GhostWitch:
+    identifier: FloatingWitch
+    spawn: WITCH
+    type: WITCH
+    name: §oOl' Sally
+    range: 32
+    amount: 1
+    maximum_spawn_attempts: 10
+    spawn_chance: 0.4
+    drops:
+     Newfriendlives:
+      material: NETHER_WARTS
+      amount: 20
+      lore: The Great War's Souls
+    buffs:
+     Ghosty:
+      type: INVISIBILITY
+     Slow2:
+      type: SLOW
+      level: 2
+    y_spawn_range: 8
+    minimum_light_level: 0
+    maximum_light_level: 4
