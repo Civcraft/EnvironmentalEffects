@@ -221,6 +221,6 @@ monster:
       - STATIONARY_LAVA
       - STATIONARY_WATER 
      health: 3000
-     despawn_on_chunk_unload: false
+     despawn_on_chunk_unload: true
      can_pickup_items: false
      y_spawn_range: 16
