@@ -253,8 +253,8 @@ monster:
         Prot2:
          enchant: PROTECTION_ENVIRONMENTAL
          level: 2
-      skullhelm2:
-       material: SKULL
+      leatherhelm2:
+       material: CHAINMAIL_HELMET
        enchants:
         Prot2:
          enchant: PROTECTION_ENVIRONMENTAL
@@ -277,7 +277,7 @@ monster:
        level: 1
        duration: 2s
        chance: 1.0 
-     nightv:
+      nightv:
        type: NIGHT_VISION
        level: 1
        duration: 30s
@@ -373,39 +373,3 @@ monster:
       - DIRT
       - GRASS
       - SAND
-
-spawner:
- GhostWitchesOfAquila:
-  updatetime: 2m
-  areas:
-   locations:
-    Aquila:
-     Shape: CIRCLE
-     xsize: 100
-     center:
-       x: 1000
-       z: 64
-  mobs:
-   GhostWitch:
-    identifier: FloatingWitch2
-    spawn: WITCH
-    type: WITCH
-    name: §oOl' §oSally
-    range: 32
-    amount: 1
-    maximum_spawn_attempts: 10
-    spawn_chance: 0.4
-    drops:
-     Newfriendlives:
-      material: NETHER_WARTS
-      amount: 10
-      lore: The Great War's Souls
-    buffs:
-     Ghosty:
-      type: INVISIBILITY
-     Slow2:
-      type: SLOW
-      level: 2
-    y_spawn_range: 8
-    minimum_light_level: 0
-    maximum_light_level: 5
