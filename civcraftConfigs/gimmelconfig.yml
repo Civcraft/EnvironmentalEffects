@@ -224,7 +224,7 @@ monster:
        lore: Zombie Quiver
       pistonwithstickyblood:
        material: PISTON_STICKY_BASE
-       amount: 2
+       amount: 1
      equipment:
       ZombieArrows:
        material: BOW 
