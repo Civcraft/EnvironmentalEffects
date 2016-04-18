@@ -172,10 +172,13 @@ monster:
      on_hit_message: Git Rekt Son
      spawn_chance: 0.1
      drops:
+      pistonwithstickyoil:
+       material: PISTON_STICKY_BASE
+       amount: 2
       DasRekker:
        material: WOOD_SWORD 
        amount: 1
-       chance: 0.01
+       chance: 0.1
        lore: Das Rekker Wood Sword
        enchants:
         FA2:
@@ -218,6 +221,6 @@ monster:
       - STATIONARY_LAVA
       - STATIONARY_WATER 
      health: 3000
-     despawn_on_chunk_unload: true
+     despawn_on_chunk_unload: false
      can_pickup_items: false
      y_spawn_range: 16
