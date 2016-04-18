@@ -163,9 +163,6 @@ monster:
       fireBoots154:
        material: LEATHER_BOOTS
        enchants:
-        FeatherFall4:
-         enchant: PROTECTION_FALL
-         level: 3
         Prot451:
          enchant: PROTECTION_FIRE
          level: 451
