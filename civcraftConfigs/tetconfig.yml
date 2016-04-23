@@ -133,9 +133,9 @@ monster:
       name: §kFive §2JungleSkelly §kFive 
       spawn_chance: 0.08
       drops:
-       tabbyboots:
+       Spookyboots:
         material: CHAINMAIL_BOOTS
-        lore: "Tabbynya's Boots" 
+        lore: Chocolate Boots 
         chance: 0.2
         enchants:
          wowmuchfall:
@@ -277,7 +277,6 @@ monster:
                        duration: 3s
                        chance: 0.5 
  BongoRuins:
-  zombieloggers:
   updatetime: 1m
   areas:
    locations:
