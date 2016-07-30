@@ -44,7 +44,7 @@ public class MobListeners implements Listener {
 	@EventHandler
 	public void monsterSpawn(CreatureSpawnEvent e) {
 		if (cancelAllOther
-				&& e.getSpawnReason() == SpawnReason.NATURAL
+				&& (e.getSpawnReason() == SpawnReason.NATURAL || e.getSpawnReason() == SpawnReason.CHUNK_GEN)
 				&& e.getEntity() instanceof LivingEntity) {
 			e.setCancelled(true);
 		}

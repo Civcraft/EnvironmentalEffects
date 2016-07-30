@@ -15,8 +15,6 @@
 	</properties>
 
 	<build>
-		<sourceDirectory>${basedir}/src</sourceDirectory>
-
 		<resources>
 			<resource>
 				<directory>${basedir}</directory>
