@@ -11,6 +11,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.inventory.EntityEquipment;
@@ -36,6 +37,7 @@ public class MobConfig {
 	private HashMap<PotionEffect, Double> onHitDebuffs;
 	private String name;
 	private int range;
+	private int minimumDistanceFromPlayer;
 	private Random rng;
 	private int maximumTries;
 	private double spawnChance;
@@ -61,8 +63,8 @@ public class MobConfig {
 			HashMap<PotionEffectType, Integer> buffs,
 			LinkedList<ItemStack> armour, LinkedList<ItemStack> drops,
 			HashMap<PotionEffect, Double> onHitDebuffs, String deathMessage,
-			double spawnChance, int amount, int range, int maxiumumTries,
-			String onHitMessage, LinkedList<Material> spawnOnBlocks,
+			double spawnChance, int amount, int range, int minimumDistanceFromPlayer, 
+			int maxiumumTries, String onHitMessage, LinkedList<Material> spawnOnBlocks,
 			LinkedList<Material> doNotSpawnOnBlocks,
 			LinkedList<Material> spawnInBlocks, int minimumLightLevel,
 			int maximumLightLevel, boolean alternativeVersion, int lureRange,
@@ -77,6 +79,7 @@ public class MobConfig {
 		this.armour = armour;
 		this.drops = drops;
 		this.range = range;
+		this.minimumDistanceFromPlayer = minimumDistanceFromPlayer;
 		this.rng = new Random();
 		this.maximumTries = maxiumumTries;
 		this.spawnChance = spawnChance;
@@ -142,8 +145,10 @@ public class MobConfig {
 
 	public Location findSpawningLocation(Location loc) {
 		for (int i = 0; i < maximumTries; i++) {
-			int x = loc.getBlockX() + rng.nextInt(range * 2) - range;
-			int z = loc.getBlockZ() + rng.nextInt(range * 2) - range;
+			int raduis = rng.nextInt(range - minimumDistanceFromPlayer) + minimumDistanceFromPlayer;
+			double angle = rng.nextDouble() * 360;
+			int x = (int) (loc.getBlockX() + (raduis * Math.cos(angle)));
+			int z = (int) (loc.getBlockZ() + (raduis * Math.sin(angle)));
 			BlockCountState bcs = BlockCountState.NOTHING;
 			LinkedList<Integer> yLevels = new LinkedList<Integer>();
 			for (int y = Math.max(0, loc.getBlockY() - ySpawnRange); y <= Math.min(255,
@@ -155,6 +160,14 @@ public class MobConfig {
 							.contains(m)))
 							|| (spawnOnBlocks != null && spawnOnBlocks
 									.contains(m))) {
+						
+						for (Entity entity : loc.getWorld().getNearbyEntities(loc, minimumDistanceFromPlayer,
+								minimumDistanceFromPlayer, minimumDistanceFromPlayer)) {
+							if (entity instanceof Player) {
+								break;
+							}
+						}
+						
 						bcs = BlockCountState.FOUNDBASEBLOCK;
 					}
 					break;
