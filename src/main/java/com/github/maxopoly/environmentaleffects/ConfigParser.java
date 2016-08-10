@@ -519,6 +519,7 @@ public class ConfigParser {
 				.valueOf(currentMobConfig.getString("type"));
 		String name = currentMobConfig.getString("name", null);
 		int range = currentMobConfig.getInt("range", 32);
+		int minimumDistanceFromPlayer = currentMobConfig.getInt("minimum_distance_from_player", 8);
 		int amount = currentMobConfig.getInt("amount", 1);
 		int maximumTries = currentMobConfig.getInt("maximum_spawn_attempts", 5);
 		String deathmsg = currentMobConfig.getString("deathmessage", null);
@@ -598,7 +599,7 @@ public class ConfigParser {
 				+ minimumLightLevel + ",maximumLightLevel:" + maximumLightLevel
 				+ ",alternativeVersion:" + alternativeVersion);
 		return new MobConfig(identifier, type, name, buffs, armour, drops, onHitDebuffs,
-				deathmsg, spawnChance, amount, range, maximumTries,
+				deathmsg, spawnChance, amount, range, minimumDistanceFromPlayer, maximumTries,
 				onHitMessage, blocksToSpawnOn, blocksNotToSpawnOn,
 				blocksToSpawnIn, minimumLightLevel, maximumLightLevel,
 				alternativeVersion,lureRange, helmetDropChance, chestDropChance,
