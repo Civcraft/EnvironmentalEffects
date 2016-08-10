@@ -146,7 +146,7 @@ public class MobConfig {
 	public Location findSpawningLocation(Location loc) {
 		for (int i = 0; i < maximumTries; i++) {
 			int raduis = rng.nextInt(range - minimumDistanceFromPlayer) + minimumDistanceFromPlayer;
-			double angle = rng.nextDouble() * 360;
+			double angle = rng.nextDouble() * 2.0 * Math.PI;
 			int x = (int) (loc.getBlockX() + (raduis * Math.cos(angle)));
 			int z = (int) (loc.getBlockZ() + (raduis * Math.sin(angle)));
 			BlockCountState bcs = BlockCountState.NOTHING;
