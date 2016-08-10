@@ -161,14 +161,17 @@ public class MobConfig {
 							|| (spawnOnBlocks != null && spawnOnBlocks
 									.contains(m))) {
 						
+						bcs = BlockCountState.FOUNDBASEBLOCK;
+						
 						for (Entity entity : loc.getWorld().getNearbyEntities(loc, minimumDistanceFromPlayer,
 								minimumDistanceFromPlayer, minimumDistanceFromPlayer)) {
 							if (entity instanceof Player) {
+								bcs = BlockCountState.NOTHING;
 								break;
 							}
 						}
 						
-						bcs = BlockCountState.FOUNDBASEBLOCK;
+						break;
 					}
 					break;
 				case FOUNDBASEBLOCK:
