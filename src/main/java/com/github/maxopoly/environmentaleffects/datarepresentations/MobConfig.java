@@ -163,7 +163,8 @@ public class MobConfig {
 						
 						bcs = BlockCountState.FOUNDBASEBLOCK;
 						
-						for (Entity entity : loc.getWorld().getNearbyEntities(loc, minimumDistanceFromPlayer,
+						Location spawnLocatio  = new Location(loc.getWorld(), x, y, z);
+						for (Entity entity : loc.getWorld().getNearbyEntities(spawnLocatio, minimumDistanceFromPlayer,
 								minimumDistanceFromPlayer, minimumDistanceFromPlayer)) {
 							if (entity instanceof Player) {
 								bcs = BlockCountState.NOTHING;
