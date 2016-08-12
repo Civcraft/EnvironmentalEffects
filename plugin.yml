@@ -1,6 +1,7 @@
-name: EnvironmentalEffects
-version: 1.0
+name: ${project.name}
+version: ${project.version}
 author: [Maxopoly]
+authors: [BlackXNT, ProgrammerDan]
 depend: [CivModCore]
 main: com.github.maxopoly.environmentaleffects.EnvironmentalEffects
 commands:

@@ -45,7 +45,7 @@ public class MobListeners implements Listener {
 	public void monsterSpawn(CreatureSpawnEvent e) {
 		if (cancelAllOther
 				&& (e.getSpawnReason() == SpawnReason.NATURAL || e.getSpawnReason() == SpawnReason.CHUNK_GEN
-				|| e.getSpawnReason() == SpawnReason.LIGHTNING || e.getSpawnReason() == SpawnReason.TRAP)
+				|| e.getSpawnReason() == SpawnReason.LIGHTNING || e.getSpawnReason().name().equalsIgnoreCase("TRAP")) // build refuses to work with standard enum, even though it definitely exists
 				&& e.getEntity() instanceof LivingEntity) {
 			e.setCancelled(true);
 		}
