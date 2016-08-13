@@ -151,7 +151,7 @@ public class MobConfig {
 			int x = (int) (loc.getBlockX() + (raduis * Math.cos(angle)));
 			int z = (int) (loc.getBlockZ() + (raduis * Math.sin(angle)));
 			BlockCountState bcs = BlockCountState.NOTHING;
-			LinkedList<Integer> yLevels = new LinkedList<Integer>();
+			LinkedList<Float> yLevels = new LinkedList<Float>();
 			for (int y = Math.max(0, loc.getBlockY() - ySpawnRange); 
 					y <= Math.min(254, loc.getBlockY() + ySpawnRange); y++) {
 				Block block = loc.getWorld().getBlockAt(x, y, z);
@@ -161,7 +161,7 @@ public class MobConfig {
 					if ( (spawnInBlocks == null && m == Material.AIR)
 							||
 						 (spawnInBlocks != null && spawnInBlocks.contains(m)) ) {
-						int light = Math.max(block.getLightFromSky(), block.getLightFromBlocks());
+						int light = block.getLightLevel(); //Math.max(block.getLightFromSky(), block.getLightFromBlocks());
 
 						if (light >= minimumLightLevel && light <= maximumLightLevel) {
 							bcs = BlockCountState.ONEAIR;
@@ -177,7 +177,7 @@ public class MobConfig {
 							(spawnInBlocks == null && m == Material.AIR)
 								||
 							(spawnInBlocks != null && spawnInBlocks.contains(m)) ) ) {
-						yLevels.add(y);
+						yLevels.add((float) y - 0.5f);
 						bcs = BlockCountState.NOTHING;
 						break;
 					} else {
@@ -209,8 +209,8 @@ public class MobConfig {
 				}
 			}
 			if (yLevels.size() > 0) {
-				return new Location(loc.getWorld(), x, yLevels.get(rng
-						.nextInt(yLevels.size())), z);
+				return new Location(loc.getWorld(), (double) x + 0.5d, yLevels.get(rng
+						.nextInt(yLevels.size())), (double) z + 0.5d);
 			}
 		}
 		return null;
