@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -126,7 +127,7 @@ public class MobConfig {
 		}
 		LinkedList<Entity> resultMobs = new LinkedList<Entity>();
 		for (int i = 0; i < amount; i++) {
-			LivingEntity mob = (LivingEntity) createMobAt(spawnLoc);
+			LivingEntity mob = (LivingEntity) createMobAt(spawnLoc, 0.0d);
 			if (mob != null) {
 				resultMobs.add(mob);
 			}
@@ -150,23 +151,52 @@ public class MobConfig {
 			int x = (int) (loc.getBlockX() + (raduis * Math.cos(angle)));
 			int z = (int) (loc.getBlockZ() + (raduis * Math.sin(angle)));
 			BlockCountState bcs = BlockCountState.NOTHING;
-			LinkedList<Integer> yLevels = new LinkedList<Integer>();
-			for (int y = Math.max(0, loc.getBlockY() - ySpawnRange); y <= Math.min(255,
-					loc.getBlockY() + ySpawnRange); y++) {
-				Material m = loc.getWorld().getBlockAt(x, y, z).getType();
+			LinkedList<Float> yLevels = new LinkedList<Float>();
+			for (int y = Math.max(0, loc.getBlockY() - ySpawnRange); 
+					y <= Math.min(254, loc.getBlockY() + ySpawnRange); y++) {
+				Block block = loc.getWorld().getBlockAt(x, y, z);
+				Material m = block.getType();
 				switch (bcs) {
+				case FOUNDBASEBLOCK:
+					if ( (spawnInBlocks == null && m == Material.AIR)
+							||
+						 (spawnInBlocks != null && spawnInBlocks.contains(m)) ) {
+						int light = block.getLightLevel(); //Math.max(block.getLightFromSky(), block.getLightFromBlocks());
+
+						if (light >= minimumLightLevel && light <= maximumLightLevel) {
+							bcs = BlockCountState.ONEAIR;
+						}
+						break;
+					} else {
+					 	bcs = BlockCountState.NOTHING;
+					}
+					// No break. The prior block isn't a valid BaseBlock, but perhaps this new one is, so we
+					// fall through and check it.
+				case ONEAIR:
+					if ( bcs == BlockCountState.ONEAIR && (
+							(spawnInBlocks == null && m == Material.AIR)
+								||
+							(spawnInBlocks != null && spawnInBlocks.contains(m)) ) ) {
+						yLevels.add((float) y - 0.5f);
+						bcs = BlockCountState.NOTHING;
+						break;
+					} else {
+						bcs = BlockCountState.NOTHING;
+					}
+					// Same logic here; prior isn't a valid spawning point in combination (too small!) but 
+					// perhaps it's a valid baseblock!
 				case NOTHING:
-					if ((spawnOnBlocks == null && m.isSolid() && (doNotSpawnOnBlocks == null || !doNotSpawnOnBlocks
-							.contains(m)))
-							|| (spawnOnBlocks != null && spawnOnBlocks
-									.contains(m))) {
+					if ( (spawnOnBlocks == null && m.isSolid() && (doNotSpawnOnBlocks == null || !doNotSpawnOnBlocks.contains(m)))
+							||
+						 (spawnOnBlocks != null && spawnOnBlocks.contains(m)) ) {
 						
 						bcs = BlockCountState.FOUNDBASEBLOCK;
 						
-						Location spawnLocatio  = new Location(loc.getWorld(), x, y, z);
-						for (Entity entity : loc.getWorld().getNearbyEntities(spawnLocatio, minimumDistanceFromPlayer,
-								minimumDistanceFromPlayer, minimumDistanceFromPlayer)) {
+						Location spawnLocatio = block.getLocation();
+						for (Entity entity : loc.getWorld().getNearbyEntities(spawnLocatio, 
+								minimumDistanceFromPlayer, minimumDistanceFromPlayer, minimumDistanceFromPlayer)) {
 							if (entity instanceof Player) {
+								// TODO we could intelligently increment Y to avoid the player's bounding box here.
 								bcs = BlockCountState.NOTHING;
 								break;
 							}
@@ -174,60 +204,32 @@ public class MobConfig {
 						
 						break;
 					}
+					bcs = BlockCountState.NOTHING; // Lets future proof by explicitly setting to NOTHING.
 					break;
-				case FOUNDBASEBLOCK:
-					if ((spawnInBlocks == null && m == Material.AIR)
-							|| (spawnInBlocks != null && spawnInBlocks
-									.contains(m))) {
-						int light = loc.getWorld().getBlockAt(x, y, z)
-								.getLightLevel();
-
-						if (light >= minimumLightLevel
-								&& light <= maximumLightLevel) {
-							bcs = BlockCountState.ONEAIR;
-						}
-						break;
-					}
-					if ((spawnOnBlocks == null && m.isSolid() && (doNotSpawnOnBlocks == null || !doNotSpawnOnBlocks
-							.contains(m)))
-							|| (spawnOnBlocks != null && spawnOnBlocks
-									.contains(m))) {
-						// another good base block, just leave the counter
-						// as it is
-						break;
-					} else {
-						bcs = BlockCountState.NOTHING;
-					}
-				case ONEAIR:
-					if ((spawnInBlocks == null && m == Material.AIR)
-							|| (spawnInBlocks != null && spawnInBlocks
-									.contains(m))) {
-						yLevels.add(y);
-						bcs = BlockCountState.NOTHING;
-						break;
-					}
-					if ((spawnOnBlocks == null && m.isSolid() && (doNotSpawnOnBlocks == null || !doNotSpawnOnBlocks
-							.contains(m)))
-							|| (spawnOnBlocks != null && spawnOnBlocks
-									.contains(m))) {
-						// base block
-						bcs = BlockCountState.FOUNDBASEBLOCK;
-						break;
-					} else {
-						bcs = BlockCountState.NOTHING;
-					}
 				}
 			}
 			if (yLevels.size() > 0) {
-				return new Location(loc.getWorld(), x, yLevels.get(rng
-						.nextInt(yLevels.size())), z);
+				return new Location(loc.getWorld(), (double) x + 0.5d, yLevels.get(rng
+						.nextInt(yLevels.size())), (double) z + 0.5d);
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * Create the mob with a random chance of failure.
+	 */
 	public Entity createMobAt(Location loc) {
-		if (rng.nextDouble() > spawnChance) {
+		return createMobAt(loc, rng.nextDouble());
+	}
+
+	/**
+	 * Give location and chance of creation. Use 0.0d to ensure spawn; preferably pass a random number
+	 * otherwise from 0.0 to 1.0. Positive chance is constrained from [0.0, spawnChance). 
+	 * Spawn will fail from [ spawnChance, inf ), but assumed bound of 1.0).
+	 */
+	public Entity createMobAt(Location loc, double chance) {
+		if (chance >= spawnChance) {
 			return null;
 		}
 		LivingEntity mob = (LivingEntity) loc.getWorld().spawnEntity(loc, type);
