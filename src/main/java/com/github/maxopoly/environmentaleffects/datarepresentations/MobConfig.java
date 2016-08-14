@@ -165,8 +165,9 @@ public class MobConfig {
 
 						if (light >= minimumLightLevel && light <= maximumLightLevel) {
 							bcs = BlockCountState.ONEAIR;
+						} else {
+							bcs = BlockCountState.NOTHING;
 						}
-						break;
 					} else {
 					 	bcs = BlockCountState.NOTHING;
 					}
