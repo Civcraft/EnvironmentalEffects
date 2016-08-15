@@ -178,7 +178,7 @@ public class MobConfig {
 							(spawnInBlocks == null && m == Material.AIR)
 								||
 							(spawnInBlocks != null && spawnInBlocks.contains(m)) ) ) {
-						yLevels.add((float) y - 0.5f);
+						yLevels.add((float) y);
 						bcs = BlockCountState.NOTHING;
 						break;
 					} else {
